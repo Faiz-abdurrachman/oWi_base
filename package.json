@@ -1,0 +1,37 @@
+{
+  "name": "goldguard-ai",
+  "version": "1.0.0",
+  "description": "Autonomous trading bot for inflation protection using USDC and tokenized gold",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "npm run dev:frontend",
+    "dev:frontend": "npm run dev -w frontend",
+    "dev:backend": "npm run dev -w backend",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "npm run build -w frontend",
+    "build:backend": "npm run build -w backend",
+    "lint": "npm run lint -w frontend && npm run lint -w backend",
+    "test": "echo \"Run 'cd contracts && forge test' for smart contract tests\"",
+    "forge:build": "cd contracts && forge build",
+    "forge:test": "cd contracts && forge test -vvv",
+    "forge:deploy": "cd contracts && forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast --verify"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "base",
+    "ethereum",
+    "gold",
+    "usdc",
+    "trading",
+    "ai",
+    "inflation"
+  ],
+  "author": "GoldGuard Team",
+  "license": "MIT"
+}

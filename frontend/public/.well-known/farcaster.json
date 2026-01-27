@@ -1,0 +1,18 @@
+{
+    "accountAssociation": {
+        "header": "base:account-association",
+        "payload": "",
+        "signature": ""
+    },
+    "frame": {
+        "version": "1",
+        "name": "GoldGuard AI",
+        "iconUrl": "https://goldguard.ai/icon.png",
+        "homeUrl": "https://goldguard.ai",
+        "imageUrl": "https://goldguard.ai/frame-image.png",
+        "buttonTitle": "Mulai Trading",
+        "splashImageUrl": "https://goldguard.ai/splash.png",
+        "splashBackgroundColor": "#0f172a",
+        "webhookUrl": "https://goldguard.ai/api/webhook"
+    }
+}
