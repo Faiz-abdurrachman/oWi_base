@@ -3,12 +3,13 @@
 > Bot Trading Otonom untuk Perlindungan Inflasi dengan AI di Base Blockchain
 
 [![Built on Base](https://img.shields.io/badge/Built%20on-Base-0052FF?style=flat-square)](https://base.org)
+[![Base Mini App](https://img.shields.io/badge/Base-Mini%20App-00D395?style=flat-square)](https://docs.base.org/mini-apps)
 [![Powered by AI](https://img.shields.io/badge/Powered%20by-AI-10B981?style=flat-square)](https://groq.com)
 [![x402 Micropayments](https://img.shields.io/badge/x402-Micropayments-FFD700?style=flat-square)](https://x402.org)
 
 ## 📋 Tentang GoldGuard AI
 
-GoldGuard AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini App** di dalam Coinbase Wallet. Aplikasi ini menggunakan kecerdasan buatan untuk secara otomatis memperdagangkan antara **USDC** (stablecoin) dan **tokenized gold** (XAU) untuk melindungi daya beli pengguna dari inflasi.
+GoldGuard AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini App** di dalam Coinbase Wallet dan Farcaster clients. Aplikasi ini menggunakan kecerdasan buatan untuk secara otomatis memperdagangkan antara **USDC** (stablecoin) dan **tokenized gold** (XAU) untuk melindungi daya beli pengguna dari inflasi.
 
 ### ✨ Fitur Utama
 
@@ -16,7 +17,7 @@ GoldGuard AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini
 - 💰 **Perlindungan Inflasi** - Otomatis hedge terhadap devaluasi mata uang
 - 💎 **Accessible** - Mulai dengan hanya $10
 - ⚡ **Pay-Per-Use** - Hanya bayar untuk sinyal AI yang Anda gunakan (via x402)
-- 📱 **Mobile-First** - Dibangun sebagai Base Mini App untuk Coinbase Wallet
+- 📱 **Base Mini App** - Berjalan native di Coinbase Wallet & Farcaster
 - 🔒 **Non-Custodial** - Anda selalu mengontrol dana Anda
 
 ## 🏗️ Tech Stack
@@ -24,11 +25,11 @@ GoldGuard AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini
 | Komponen | Teknologi |
 |----------|-----------|
 | Blockchain | Base (Sepolia Testnet) |
-| Smart Contracts | Solidity 0.8.20, Hardhat, OpenZeppelin |
-| Frontend | Next.js 14, TypeScript, TailwindCSS, Shadcn/ui |
+| Smart Contracts | Solidity 0.8.20, **Foundry**, OpenZeppelin |
+| Frontend | Next.js 14, TypeScript, TailwindCSS |
 | Web3 | Wagmi 2.x, Viem 2.x, OnchainKit |
-| Backend | Hono.js, TypeScript, Prisma |
-| Database | PostgreSQL / SQLite |
+| Mini App SDK | @farcaster/miniapp-sdk |
+| Backend | Hono.js, TypeScript |
 | AI | Groq (llama-3.3-70b-versatile) |
 | Oracle | Chainlink Price Feeds |
 
@@ -37,10 +38,16 @@ GoldGuard AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini
 ```
 goldguard-ai/
 ├── frontend/          # Next.js Base Mini App
+│   ├── app/           # App router pages
+│   ├── lib/           # Providers, hooks, contracts
+│   └── public/        # Static assets & manifest
 ├── backend/           # Hono.js API server
-├── contracts/         # Solidity smart contracts
-├── docs/              # Dokumentasi
-└── README.md          # File ini
+│   └── src/routes/    # API endpoints
+├── contracts/         # Foundry smart contracts
+│   ├── src/           # Contract source files
+│   ├── test/          # Foundry tests
+│   └── script/        # Deploy scripts
+└── README.md
 ```
 
 ## 🚀 Quick Start
@@ -48,7 +55,7 @@ goldguard-ai/
 ### Prerequisites
 
 - Node.js v18+
-- npm atau yarn
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) (untuk contracts)
 - Git
 - Wallet dengan Base Sepolia ETH
 
@@ -62,33 +69,38 @@ cd goldguard-ai
 ### 2. Install Dependencies
 
 ```bash
+# Install npm packages
 npm install
+
+# Install Foundry dependencies
+cd contracts && forge install && cd ..
 ```
 
 ### 3. Setup Environment Variables
 
 ```bash
-# Copy environment file
 cp .env.example .env
-
-# Edit dengan value Anda
-nano .env
+# Edit .env dengan API keys Anda
 ```
 
 ### 4. Jalankan Development Server
 
 ```bash
-# Terminal 1: Smart Contracts (opsional)
-cd contracts && npx hardhat node
-
-# Terminal 2: Backend
+# Terminal 1: Backend
 cd backend && npm run dev
 
-# Terminal 3: Frontend
+# Terminal 2: Frontend
 cd frontend && npm run dev
 ```
 
-### 5. Buka Aplikasi
+### 5. Test Smart Contracts
+
+```bash
+cd contracts
+forge test -vvv
+```
+
+### 6. Buka Aplikasi
 
 Buka [http://localhost:3000](http://localhost:3000) di browser.
 
@@ -98,19 +110,38 @@ Buka [http://localhost:3000](http://localhost:3000) di browser.
 |----------|-----------|
 | `MockUSDC.sol` | Token ERC-20 mock untuk USDC (6 decimals) |
 | `MockGold.sol` | Token ERC-20 mock untuk Gold (18 decimals) |
+| `MockChainlinkOracle.sol` | Mock Chainlink price feed |
 | `GoldGuardVault.sol` | Vault utama untuk deposit, trading, dan withdraw |
 
 ### Deploy ke Base Sepolia
 
 ```bash
 cd contracts
-npx hardhat run scripts/deploy-all.ts --network baseSepolia
+
+# Create .env dengan PRIVATE_KEY
+source .env
+
+# Deploy dengan Foundry
+forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast --verify
 ```
+
+## 📱 Base Mini App
+
+Aplikasi ini dibangun sebagai **Base Mini App** yang dapat berjalan di:
+- Coinbase Wallet
+- Warpcast (Farcaster)
+- Base App
+
+### Mini App Features
+- ✅ `@farcaster/miniapp-sdk` integration
+- ✅ `fc:miniapp` embed metadata
+- ✅ `/.well-known/farcaster.json` manifest
+- ✅ Coinbase Smart Wallet connector
 
 ## 🔐 Environment Variables
 
 ```env
-# Blockchain
+# Blockchain (Foundry)
 PRIVATE_KEY=your_private_key
 BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
 BASESCAN_API_KEY=your_basescan_api_key
@@ -118,13 +149,10 @@ BASESCAN_API_KEY=your_basescan_api_key
 # Frontend
 NEXT_PUBLIC_CHAIN_ID=84532
 NEXT_PUBLIC_VAULT_ADDRESS=0x...
-NEXT_PUBLIC_USDC_ADDRESS=0x...
-NEXT_PUBLIC_GOLD_ADDRESS=0x...
+NEXT_PUBLIC_ONCHAINKIT_API_KEY=your_api_key
 NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_project_id
 
 # Backend
-DATABASE_URL=postgresql://...
-REDIS_URL=redis://...
 GROQ_API_KEY=your_groq_api_key
 JWT_SECRET=your_jwt_secret
 ```
