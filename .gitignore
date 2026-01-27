@@ -34,11 +34,10 @@ Thumbs.db
 coverage/
 .nyc_output/
 
-# Hardhat
-cache/
-artifacts/
-typechain-types/
-deployments/localhost/
+# Foundry
+contracts/cache/
+contracts/out/
+contracts/broadcast/
 
 # Prisma
 prisma/dev.db
@@ -56,3 +55,9 @@ yarn-error.log*
 # Local database
 *.db
 *.sqlite
+
+# Private documents (tidak untuk public)
+prompt.md
+prompt_foundy
+prompt_complete.md
+prd.md
