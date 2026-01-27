@@ -56,3 +56,8 @@ yarn-error.log*
 # Local database
 *.db
 *.sqlite
+
+# Private documents (tidak untuk public)
+prompt.md
+prompt_foundy
+prd.md

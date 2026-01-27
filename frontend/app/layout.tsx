@@ -19,10 +19,20 @@ export const metadata: Metadata = {
         "Base",
         "USDC",
         "cryptocurrency",
+        "mini app",
+        "coinbase",
     ],
     authors: [{ name: "GoldGuard Team" }],
     creator: "GoldGuard AI",
     publisher: "GoldGuard AI",
+    applicationName: "GoldGuard AI",
+    generator: "Next.js",
+    referrer: "origin-when-cross-origin",
+    formatDetection: {
+        email: false,
+        address: false,
+        telephone: false,
+    },
 
     // Open Graph untuk social sharing
     openGraph: {
@@ -61,13 +71,38 @@ export const metadata: Metadata = {
         apple: "/apple-touch-icon.png",
     },
 
-    // Manifest untuk PWA
+    // Manifest untuk PWA/Mini App
     manifest: "/manifest.json",
 
     // Robots
     robots: {
         index: true,
         follow: true,
+    },
+
+    // Base Mini App / Farcaster meta tags
+    other: {
+        // fc:miniapp - Format resmi untuk Base Mini App embed
+        "fc:miniapp": JSON.stringify({
+            version: "next",
+            imageUrl: "https://goldguard.ai/embed-image.png",
+            button: {
+                title: "Buka GoldGuard",
+                action: {
+                    type: "launch_miniapp",
+                    name: "GoldGuard AI",
+                    url: "https://goldguard.ai",
+                    splashImageUrl: "https://goldguard.ai/splash.png",
+                    splashBackgroundColor: "#0f172a",
+                },
+            },
+        }),
+
+        // PWA / Mobile App meta tags
+        "mobile-web-app-capable": "yes",
+        "apple-mobile-web-app-capable": "yes",
+        "apple-mobile-web-app-status-bar-style": "black-translucent",
+        "apple-mobile-web-app-title": "GoldGuard",
     },
 };
 
