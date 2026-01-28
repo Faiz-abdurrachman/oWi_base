@@ -12,7 +12,7 @@ if (!fs.existsSync(exportsDir)) {
 
 // Contracts to export
 const contracts = [
-    'GoldGuardVault',
+    'oWiVault',
     'MockUSDC',
     'MockGold',
     'MockChainlinkOracle'

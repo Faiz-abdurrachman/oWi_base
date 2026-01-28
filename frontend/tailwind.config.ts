@@ -10,7 +10,7 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                // Warna utama GoldGuard
+                // Warna utama oWi
                 gold: {
                     50: "#FFFDF5",
                     100: "#FFF9E5",

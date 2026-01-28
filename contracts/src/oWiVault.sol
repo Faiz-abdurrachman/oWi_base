@@ -8,12 +8,12 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Pausable.sol";
 
 /**
- * @title GoldGuardVault
- * @author GoldGuard Team
+ * @title oWiVault
+ * @author oWi Team
  * @notice Vault non-custodial untuk trading USDC ↔ Gold dengan proteksi inflasi
  * @dev Menggunakan oracle untuk harga gold dan memungkinkan user untuk deposit, withdraw, dan trade
  */
-contract GoldGuardVault is ReentrancyGuard, Ownable, Pausable {
+contract oWiVault is ReentrancyGuard, Ownable, Pausable {
     using SafeERC20 for IERC20;
 
     // ============================================

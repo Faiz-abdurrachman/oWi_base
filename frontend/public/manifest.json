@@ -1,6 +1,6 @@
 {
-    "name": "GoldGuard AI",
-    "short_name": "GoldGuard",
+    "name": "oWi AI",
+    "short_name": "oWi",
     "description": "Bot Trading Otonom untuk Perlindungan Inflasi dengan AI",
     "start_url": "/dashboard",
     "display": "standalone",
@@ -84,7 +84,7 @@
     "related_applications": [
         {
             "platform": "webapp",
-            "url": "https://goldguard.ai"
+            "url": "https://owi.ai"
         }
     ],
     "prefer_related_applications": false,

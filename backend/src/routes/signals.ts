@@ -147,7 +147,7 @@ async function generateTradingSignal(): Promise<TradingSignal> {
             messages: [
                 {
                     role: "system",
-                    content: `Kamu adalah AI trading advisor untuk GoldGuard, sebuah platform yang membantu pengguna melindungi kekayaan dari inflasi dengan trading emas tokenized.
+                    content: `Kamu adalah AI trading advisor untuk oWi, sebuah platform yang membantu pengguna melindungi kekayaan dari inflasi dengan trading emas tokenized.
 
 Analisis data berikut dan berikan rekomendasi trading:
 - Harga Emas saat ini: $${goldPrice.toFixed(2)}/oz

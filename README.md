@@ -1,4 +1,4 @@
-# 🛡️ GoldGuard AI
+# 🛡️ oWi AI
 
 > Bot Trading Otonom untuk Perlindungan Inflasi dengan AI di Base Blockchain
 
@@ -7,9 +7,9 @@
 [![Powered by AI](https://img.shields.io/badge/Powered%20by-AI-10B981?style=flat-square)](https://groq.com)
 [![x402 Micropayments](https://img.shields.io/badge/x402-Micropayments-FFD700?style=flat-square)](https://x402.org)
 
-## 📋 Tentang GoldGuard AI
+## 📋 Tentang oWi AI
 
-GoldGuard AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini App** di dalam Coinbase Wallet dan Farcaster clients. Aplikasi ini menggunakan kecerdasan buatan untuk secara otomatis memperdagangkan antara **USDC** (stablecoin) dan **tokenized gold** (XAU) untuk melindungi daya beli pengguna dari inflasi.
+oWi AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini App** di dalam Coinbase Wallet dan Farcaster clients. Aplikasi ini menggunakan kecerdasan buatan untuk secara otomatis memperdagangkan antara **USDC** (stablecoin) dan **tokenized gold** (XAU) untuk melindungi daya beli pengguna dari inflasi.
 
 ### ✨ Fitur Utama
 
@@ -36,7 +36,7 @@ GoldGuard AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini
 ## 📁 Struktur Proyek
 
 ```
-goldguard-ai/
+owi/
 ├── frontend/          # Next.js Base Mini App
 │   ├── app/           # App router pages
 │   ├── lib/           # Providers, hooks, contracts
@@ -62,8 +62,8 @@ goldguard-ai/
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/goldguard-ai.git
-cd goldguard-ai
+git clone https://github.com/yourusername/owi.git
+cd owi
 ```
 
 ### 2. Install Dependencies
@@ -111,7 +111,7 @@ Buka [http://localhost:3000](http://localhost:3000) di browser.
 | `MockUSDC.sol` | Token ERC-20 mock untuk USDC (6 decimals) |
 | `MockGold.sol` | Token ERC-20 mock untuk Gold (18 decimals) |
 | `MockChainlinkOracle.sol` | Mock Chainlink price feed |
-| `GoldGuardVault.sol` | Vault utama untuk deposit, trading, dan withdraw |
+| `oWiVault.sol` | Vault utama untuk deposit, trading, dan withdraw |
 
 ### Deploy ke Base Sepolia
 

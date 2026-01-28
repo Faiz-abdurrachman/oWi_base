@@ -47,7 +47,7 @@ app.use("*", prettyJSON());
 app.get("/", (c) => {
     return c.json({
         success: true,
-        message: "GoldGuard AI API Server",
+        message: "oWi AI API Server",
         version: "1.0.0",
         timestamp: new Date().toISOString(),
     });

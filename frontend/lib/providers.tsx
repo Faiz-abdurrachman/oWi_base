@@ -33,8 +33,8 @@ const wagmiConfig = createConfig({
     connectors: [
         // Coinbase Wallet (PRIMARY untuk Base Mini App)
         coinbaseWallet({
-            appName: "GoldGuard AI",
-            appLogoUrl: "https://goldguard.ai/logo.png",
+            appName: "oWi AI",
+            appLogoUrl: "https://owi.ai/logo.png",
         }),
         // WalletConnect (fallback)
         ...(walletConnectProjectId

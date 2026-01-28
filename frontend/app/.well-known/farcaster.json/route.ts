@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
  * Sesuai dokumentasi: https://docs.base.org/mini-apps/quickstart/existing-apps/install
  */
 export async function GET() {
-    const URL = process.env.NEXT_PUBLIC_APP_URL || "https://goldguard.ai";
+    const URL = process.env.NEXT_PUBLIC_APP_URL || "https://owi.ai";
 
     const manifest = {
         accountAssociation: {
@@ -19,7 +19,7 @@ export async function GET() {
         },
         miniapp: {
             version: "1",
-            name: "GoldGuard AI",
+            name: "oWi AI",
             homeUrl: URL,
             iconUrl: `${URL}/icon.png`,
             splashImageUrl: `${URL}/splash.png`,
@@ -37,7 +37,7 @@ export async function GET() {
             tags: ["trading", "gold", "ai", "defi", "base"],
             heroImageUrl: `${URL}/hero.png`,
             tagline: "Lindungi kekayaan dari inflasi",
-            ogTitle: "GoldGuard AI - Trading Emas Otomatis",
+            ogTitle: "oWi AI - Trading Emas Otomatis",
             ogDescription:
                 "Bot trading AI untuk perlindungan inflasi dengan emas tokenized di Base.",
             ogImageUrl: `${URL}/og-image.png`,

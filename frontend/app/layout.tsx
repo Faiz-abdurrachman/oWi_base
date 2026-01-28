@@ -6,7 +6,7 @@ import "./globals.css";
  * Metadata untuk SEO dan Base Mini App
  */
 export const metadata: Metadata = {
-    title: "GoldGuard AI - Perlindungan Inflasi dengan Trading Emas",
+    title: "oWi AI - Perlindungan Inflasi dengan Trading Emas",
     description:
         "Bot trading otonom yang melindungi kekayaan Anda dari inflasi dengan memperdagangkan USDC dan tokenized gold secara otomatis menggunakan AI.",
     keywords: [
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
         "mini app",
         "coinbase",
     ],
-    authors: [{ name: "GoldGuard Team" }],
-    creator: "GoldGuard AI",
-    publisher: "GoldGuard AI",
-    applicationName: "GoldGuard AI",
+    authors: [{ name: "oWi Team" }],
+    creator: "oWi AI",
+    publisher: "oWi AI",
+    applicationName: "oWi AI",
     generator: "Next.js",
     referrer: "origin-when-cross-origin",
     formatDetection: {
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     openGraph: {
         type: "website",
         locale: "id_ID",
-        url: "https://goldguard.ai",
-        siteName: "GoldGuard AI",
-        title: "GoldGuard AI - Perlindungan Inflasi Otomatis",
+        url: "https://owi.ai",
+        siteName: "oWi AI",
+        title: "oWi AI - Perlindungan Inflasi Otomatis",
         description:
             "Bot trading AI yang melindungi kekayaan Anda dari inflasi dengan trading emas otomatis.",
         images: [
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
                 url: "/og-image.png",
                 width: 1200,
                 height: 630,
-                alt: "GoldGuard AI",
+                alt: "oWi AI",
             },
         ],
     },
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
     // Twitter Card
     twitter: {
         card: "summary_large_image",
-        site: "@goldguardai",
-        creator: "@goldguardai",
-        title: "GoldGuard AI - Perlindungan Inflasi Otomatis",
+        site: "@owi_ai",
+        creator: "@owi_ai",
+        title: "oWi AI - Perlindungan Inflasi Otomatis",
         description:
             "Bot trading AI yang melindungi kekayaan Anda dari inflasi dengan trading emas otomatis.",
         images: ["/og-image.png"],
@@ -85,14 +85,14 @@ export const metadata: Metadata = {
         // fc:miniapp - Format resmi untuk Base Mini App embed
         "fc:miniapp": JSON.stringify({
             version: "next",
-            imageUrl: "https://goldguard.ai/embed-image.png",
+            imageUrl: "https://owi.ai/embed-image.png",
             button: {
-                title: "Buka GoldGuard",
+                title: "Buka oWi",
                 action: {
                     type: "launch_miniapp",
-                    name: "GoldGuard AI",
-                    url: "https://goldguard.ai",
-                    splashImageUrl: "https://goldguard.ai/splash.png",
+                    name: "oWi AI",
+                    url: "https://owi.ai",
+                    splashImageUrl: "https://owi.ai/splash.png",
                     splashBackgroundColor: "#0f172a",
                 },
             },
@@ -102,7 +102,7 @@ export const metadata: Metadata = {
         "mobile-web-app-capable": "yes",
         "apple-mobile-web-app-capable": "yes",
         "apple-mobile-web-app-status-bar-style": "black-translucent",
-        "apple-mobile-web-app-title": "GoldGuard",
+        "apple-mobile-web-app-title": "oWi",
     },
 };
 

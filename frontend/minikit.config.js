@@ -1,23 +1,23 @@
 /** @type {import('@anthropic/minikit').MiniKitConfig} */
 export default {
     // Mini App Info
-    name: 'GoldGuard AI',
+    name: 'oWi AI',
     description: 'Bot Trading Otonom untuk Perlindungan Inflasi',
     version: '1.0.0',
 
     // App Icon (1024x1024 required for Mini App)
-    iconUrl: 'https://goldguard.ai/icon.png',
+    iconUrl: 'https://owi.ai/icon.png',
 
     // App Cover Image (1200x630 for social sharing)
-    coverUrl: 'https://goldguard.ai/cover.png',
+    coverUrl: 'https://owi.ai/cover.png',
 
     // Mini App URL (production)
-    appUrl: 'https://goldguard.ai',
+    appUrl: 'https://owi.ai',
 
     // Splash Screen
     splash: {
         backgroundColor: '#0f172a',
-        imageUrl: 'https://goldguard.ai/splash.png',
+        imageUrl: 'https://owi.ai/splash.png',
     },
 
     // Farcaster Association (will be filled after registration)

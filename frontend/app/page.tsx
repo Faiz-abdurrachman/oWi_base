@@ -17,7 +17,7 @@ import {
 import Link from "next/link";
 
 /**
- * Landing Page - Halaman utama GoldGuard AI
+ * Landing Page - Halaman utama oWi AI
  * Menampilkan value proposition, cara kerja, dan CTA connect wallet
  */
 export default function LandingPage() {
@@ -282,7 +282,7 @@ export default function LandingPage() {
                     </h2>
                     <p className="text-gray-400 mb-10 max-w-2xl mx-auto">
                         Bergabung dengan ribuan pengguna yang sudah melindungi kekayaan mereka
-                        dari inflasi dengan GoldGuard AI.
+                        dari inflasi dengan oWi AI.
                     </p>
 
                     {isConnected ? (
@@ -304,10 +304,10 @@ export default function LandingPage() {
                 <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2">
                         <Shield className="w-6 h-6 text-gold-500" />
-                        <span className="font-bold text-white">GoldGuard AI</span>
+                        <span className="font-bold text-white">oWi AI</span>
                     </div>
                     <p className="text-gray-500 text-sm">
-                        © 2026 GoldGuard AI. Dibangun untuk Base Hackathon.
+                        © 2026 oWi AI. Dibangun untuk Base Hackathon.
                     </p>
                 </div>
             </footer>

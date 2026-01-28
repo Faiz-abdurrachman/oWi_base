@@ -5,17 +5,17 @@ import "forge-std/Test.sol";
 import "../src/MockUSDC.sol";
 import "../src/MockGold.sol";
 import "../src/MockChainlinkOracle.sol";
-import "../src/GoldGuardVault.sol";
+import "../src/oWiVault.sol";
 
 /**
- * @title GoldGuardVaultTest
- * @notice Comprehensive tests untuk GoldGuardVault menggunakan Foundry
+ * @title oWiVaultTest
+ * @notice Comprehensive tests untuk oWiVault menggunakan Foundry
  */
-contract GoldGuardVaultTest is Test {
+contract oWiVaultTest is Test {
     MockUSDC public usdc;
     MockGold public gold;
     MockChainlinkOracle public oracle;
-    GoldGuardVault public vault;
+    oWiVault public vault;
 
     address public owner = address(this);
     address public user1 = address(0x1);
@@ -47,7 +47,7 @@ contract GoldGuardVaultTest is Test {
         oracle = new MockChainlinkOracle(INITIAL_GOLD_PRICE);
 
         // Deploy vault
-        vault = new GoldGuardVault(address(usdc), address(gold), uint256(INITIAL_GOLD_PRICE), owner);
+        vault = new oWiVault(address(usdc), address(gold), uint256(INITIAL_GOLD_PRICE), owner);
 
         // Setup user1 dengan USDC
         usdc.mint(user1, 10000e6); // 10,000 USDC
@@ -88,7 +88,7 @@ contract GoldGuardVaultTest is Test {
         vault.deposit(DEPOSIT_AMOUNT);
 
         // Check position
-        GoldGuardVault.Position memory pos = vault.getUserPosition(user1);
+        oWiVault.Position memory pos = vault.getUserPosition(user1);
         assertEq(pos.usdcAmount, DEPOSIT_AMOUNT);
         assertEq(pos.goldAmount, 0);
         assertEq(pos.totalDeposited, DEPOSIT_AMOUNT);
@@ -114,7 +114,7 @@ contract GoldGuardVaultTest is Test {
         vm.startPrank(user1);
         usdc.approve(address(vault), SMALL_AMOUNT);
 
-        vm.expectRevert(GoldGuardVault.BelowMinimumDeposit.selector);
+        vm.expectRevert(oWiVault.BelowMinimumDeposit.selector);
         vault.deposit(SMALL_AMOUNT);
 
         vm.stopPrank();
@@ -123,7 +123,7 @@ contract GoldGuardVaultTest is Test {
     function testDepositFailsWithZeroAmount() public {
         vm.startPrank(user1);
 
-        vm.expectRevert(GoldGuardVault.ZeroAmount.selector);
+        vm.expectRevert(oWiVault.ZeroAmount.selector);
         vault.deposit(0);
 
         vm.stopPrank();
@@ -136,7 +136,7 @@ contract GoldGuardVaultTest is Test {
         vault.deposit(DEPOSIT_AMOUNT);
         vault.deposit(DEPOSIT_AMOUNT);
 
-        GoldGuardVault.Position memory pos = vault.getUserPosition(user1);
+        oWiVault.Position memory pos = vault.getUserPosition(user1);
         assertEq(pos.usdcAmount, DEPOSIT_AMOUNT * 2);
         assertEq(pos.totalDeposited, DEPOSIT_AMOUNT * 2);
 
@@ -163,7 +163,7 @@ contract GoldGuardVaultTest is Test {
         assertEq(amountOut, expectedGold);
 
         // Check position
-        GoldGuardVault.Position memory pos = vault.getUserPosition(user1);
+        oWiVault.Position memory pos = vault.getUserPosition(user1);
         assertEq(pos.usdcAmount, DEPOSIT_AMOUNT - tradeAmount);
         assertEq(pos.goldAmount, expectedGold);
         assertEq(pos.totalTrades, 1);
@@ -181,7 +181,7 @@ contract GoldGuardVaultTest is Test {
         vault.executeTrade(true, buyAmount, 0);
 
         // Get gold balance
-        GoldGuardVault.Position memory posBefore = vault.getUserPosition(user1);
+        oWiVault.Position memory posBefore = vault.getUserPosition(user1);
         uint256 sellAmount = posBefore.goldAmount / 2;
 
         // Preview sell
@@ -193,7 +193,7 @@ contract GoldGuardVaultTest is Test {
         assertEq(amountOut, expectedUSDC);
 
         // Check position
-        GoldGuardVault.Position memory posAfter = vault.getUserPosition(user1);
+        oWiVault.Position memory posAfter = vault.getUserPosition(user1);
         assertEq(posAfter.goldAmount, posBefore.goldAmount - sellAmount);
         assertEq(posAfter.totalTrades, 2);
 
@@ -206,7 +206,7 @@ contract GoldGuardVaultTest is Test {
         vault.deposit(DEPOSIT_AMOUNT);
 
         // Try to trade more than deposited
-        vm.expectRevert(GoldGuardVault.InsufficientBalance.selector);
+        vm.expectRevert(oWiVault.InsufficientBalance.selector);
         vault.executeTrade(true, DEPOSIT_AMOUNT + 1, 0);
 
         vm.stopPrank();
@@ -223,7 +223,7 @@ contract GoldGuardVaultTest is Test {
         // Set minAmountOut higher than possible
         uint256 impossibleMinOut = expectedGold * 2;
 
-        vm.expectRevert(GoldGuardVault.SlippageExceeded.selector);
+        vm.expectRevert(oWiVault.SlippageExceeded.selector);
         vault.executeTrade(true, tradeAmount, impossibleMinOut);
 
         vm.stopPrank();
@@ -249,7 +249,7 @@ contract GoldGuardVaultTest is Test {
         assertEq(balanceAfter - balanceBefore, withdrawAmount);
 
         // Check position
-        GoldGuardVault.Position memory pos = vault.getUserPosition(user1);
+        oWiVault.Position memory pos = vault.getUserPosition(user1);
         assertEq(pos.usdcAmount, DEPOSIT_AMOUNT - withdrawAmount);
         assertEq(pos.totalWithdrawn, withdrawAmount);
 
@@ -264,7 +264,7 @@ contract GoldGuardVaultTest is Test {
         vault.executeTrade(true, DEPOSIT_AMOUNT, 0);
 
         // Check position - semua dalam gold
-        GoldGuardVault.Position memory posBefore = vault.getUserPosition(user1);
+        oWiVault.Position memory posBefore = vault.getUserPosition(user1);
         assertEq(posBefore.usdcAmount, 0);
         assertGt(posBefore.goldAmount, 0);
 
@@ -276,7 +276,7 @@ contract GoldGuardVaultTest is Test {
         vault.withdraw(withdrawAmount);
 
         // Check position - gold harus di-convert
-        GoldGuardVault.Position memory posAfter = vault.getUserPosition(user1);
+        oWiVault.Position memory posAfter = vault.getUserPosition(user1);
         assertEq(posAfter.goldAmount, 0); // Semua gold di-convert
 
         vm.stopPrank();
@@ -287,7 +287,7 @@ contract GoldGuardVaultTest is Test {
         usdc.approve(address(vault), DEPOSIT_AMOUNT);
         vault.deposit(DEPOSIT_AMOUNT);
 
-        vm.expectRevert(GoldGuardVault.InsufficientBalance.selector);
+        vm.expectRevert(oWiVault.InsufficientBalance.selector);
         vault.withdraw(DEPOSIT_AMOUNT * 2);
 
         vm.stopPrank();
@@ -397,7 +397,7 @@ contract GoldGuardVaultTest is Test {
         usdc.approve(address(vault), amount);
         vault.deposit(amount);
 
-        GoldGuardVault.Position memory pos = vault.getUserPosition(user1);
+        oWiVault.Position memory pos = vault.getUserPosition(user1);
         assertEq(pos.usdcAmount, amount);
         vm.stopPrank();
     }

@@ -1,5 +1,5 @@
 {
-    "name": "goldguard-backend",
+    "name": "owi-backend",
     "version": "1.0.0",
     "description": "Backend API untuk GoldGuard AI",
     "type": "module",

@@ -335,7 +335,7 @@ export default function TradingPage() {
                         <div className="card bg-dark-700 p-4 flex gap-3">
                             <AlertCircle className="w-5 h-5 text-gold-500 flex-shrink-0 mt-0.5" />
                             <div className="text-sm text-gray-400">
-                                <p>Dana yang Anda deposit akan dikelola oleh smart contract GoldGuard.</p>
+                                <p>Dana yang Anda deposit akan dikelola oleh smart contract oWi.</p>
                                 <p className="mt-1">Anda dapat menarik kapan saja.</p>
                             </div>
                         </div>

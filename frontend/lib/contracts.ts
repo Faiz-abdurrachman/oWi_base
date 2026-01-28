@@ -1,4 +1,4 @@
-// ABI untuk GoldGuardVault contract
+// ABI untuk oWiVault contract
 export const VAULT_ABI = [
     // Read functions
     {

@@ -27,7 +27,7 @@ app.post("/nonce", async (c) => {
         }
 
         // Generate random nonce
-        const nonce = `Masuk ke GoldGuard AI\n\nNonce: ${crypto.randomUUID()}\nTimestamp: ${Date.now()}`;
+        const nonce = `Masuk ke oWi AI\n\nNonce: ${crypto.randomUUID()}\nTimestamp: ${Date.now()}`;
 
         // Store nonce dengan expiry 5 menit
         nonceStore.set(address.toLowerCase(), {

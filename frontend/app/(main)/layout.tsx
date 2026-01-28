@@ -95,7 +95,7 @@ export default function MainLayout({
                     {/* Logo */}
                     <Link href="/dashboard" className="flex items-center gap-2">
                         <Shield className="w-7 h-7 text-gold-500" />
-                        <span className="font-bold text-white text-lg">GoldGuard</span>
+                        <span className="font-bold text-white text-lg">oWi</span>
                     </Link>
 
                     {/* Wallet Info */}

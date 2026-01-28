@@ -5,11 +5,11 @@ import "forge-std/Script.sol";
 import "../src/MockUSDC.sol";
 import "../src/MockGold.sol";
 import "../src/MockChainlinkOracle.sol";
-import "../src/GoldGuardVault.sol";
+import "../src/oWiVault.sol";
 
 /**
  * @title Deploy
- * @notice Script untuk deploy semua contracts GoldGuard
+ * @notice Script untuk deploy semua contracts oWi
  */
 contract Deploy is Script {
     function run() external {
@@ -17,7 +17,7 @@ contract Deploy is Script {
         address deployer = vm.addr(deployerPrivateKey);
 
         console.log("===========================================");
-        console.log("  GoldGuard AI - Deployment Script");
+        console.log("  oWi AI - Deployment Script");
         console.log("===========================================");
         console.log("");
         console.log("Deployer:", deployer);
@@ -50,16 +50,16 @@ contract Deploy is Script {
         console.log("MockChainlinkOracle deployed at:", address(oracle));
 
         // ============================================
-        // Deploy GoldGuardVault
+        // Deploy oWiVault
         // ============================================
-        console.log("Deploying GoldGuardVault...");
-        GoldGuardVault vault = new GoldGuardVault(
+        console.log("Deploying oWiVault...");
+        oWiVault vault = new oWiVault(
             address(usdc),
             address(gold),
             uint256(initialGoldPrice),
             deployer
         );
-        console.log("GoldGuardVault deployed at:", address(vault));
+        console.log("oWiVault deployed at:", address(vault));
 
         // ============================================
         // Fund vault with liquidity
@@ -85,7 +85,7 @@ contract Deploy is Script {
         console.log("  MockUSDC:          ", address(usdc));
         console.log("  MockGold:          ", address(gold));
         console.log("  MockChainlinkOracle:", address(oracle));
-        console.log("  GoldGuardVault:    ", address(vault));
+        console.log("  oWiVault:    ", address(vault));
         console.log("");
         console.log("===========================================");
 
