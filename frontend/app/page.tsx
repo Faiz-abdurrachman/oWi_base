@@ -268,7 +268,7 @@ export default function LandingPage() {
                         </div>
                         <div className="flex items-center gap-2 text-gray-400">
                             <Bot className="w-6 h-6" />
-                            <span>AI by Groq</span>
+                            <span>AI by Gemini</span>
                         </div>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ const app = new Hono();
 app.use(
     "/*",
     cors({
-        origin: ["http://localhost:3000", "https://goldguard.ai"],
+        origin: ["http://localhost:3000", "https://owi.ai"],
         allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowHeaders: ["Content-Type", "Authorization", "X-402-Payment"],
         exposeHeaders: ["X-402-Price", "X-402-Address"],
@@ -107,7 +107,7 @@ const port = Number(process.env.PORT) || 3001;
 console.log(`
 ╔═══════════════════════════════════════════════════════╗
 ║                                                       ║
-║   🛡️  GoldGuard AI Backend Server                     ║
+║   🛡️  oWi AI Backend Server                          ║
 ║                                                       ║
 ║   Port: ${port}                                         ║
 ║   Environment: ${process.env.NODE_ENV || "development"}                     ║

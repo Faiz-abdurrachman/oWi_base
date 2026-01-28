@@ -35,14 +35,14 @@ Pastikan sudah terinstall:
 3. Klik **"Create API Key"**
 4. Copy API Key → simpan untuk `NEXT_PUBLIC_ONCHAINKIT_API_KEY`
 
-### 3. Groq API Key
+### 3. Gemini API Key
 **Untuk:** AI trading signals
 
-1. Buka [console.groq.com](https://console.groq.com)
-2. Signup dengan Google atau GitHub
-3. Klik **"API Keys"** di sidebar
-4. Klik **"Create API Key"**
-5. Copy API Key → simpan untuk `GROQ_API_KEY`
+1. Buka [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Login dengan akun Google
+3. Klik **"Create API Key"**
+4. Pilih project atau buat baru
+5. Copy API Key → simpan untuk `GEMINI_API_KEY`
 
 ### 4. BaseScan API Key
 **Untuk:** Contract verification di Base Sepolia
@@ -98,7 +98,7 @@ NEXT_PUBLIC_APP_URL=https://owi.ai
 # Backend
 PORT=3001
 JWT_SECRET=generate_random_string_minimum_32_characters
-GROQ_API_KEY=your_groq_api_key
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
 **Contracts .env:**

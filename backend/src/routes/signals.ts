@@ -1,12 +1,11 @@
 import { Hono } from "hono";
-import Groq from "groq-sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const app = new Hono();
 
-// Initialize Groq client
-const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY || "",
-});
+// Initialize Gemini client
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 // x402 payment configuration
 const SIGNAL_PRICE = 0.01; // 0.01 USDC per signal
@@ -134,7 +133,7 @@ app.get("/history", async (c) => {
 });
 
 /**
- * Generate trading signal using Groq AI
+ * Generate trading signal using Gemini AI
  */
 async function generateTradingSignal(): Promise<TradingSignal> {
     // Mock market data (in production, fetch from real API)
@@ -142,12 +141,7 @@ async function generateTradingSignal(): Promise<TradingSignal> {
     const inflationRate = 3.2 + (Math.random() - 0.5) * 0.5;
 
     try {
-        const completion = await groq.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
-            messages: [
-                {
-                    role: "system",
-                    content: `Kamu adalah AI trading advisor untuk oWi, sebuah platform yang membantu pengguna melindungi kekayaan dari inflasi dengan trading emas tokenized.
+        const prompt = `Kamu adalah AI trading advisor untuk oWi, sebuah platform yang membantu pengguna melindungi kekayaan dari inflasi dengan trading emas tokenized.
 
 Analisis data berikut dan berikan rekomendasi trading:
 - Harga Emas saat ini: $${goldPrice.toFixed(2)}/oz
@@ -166,18 +160,10 @@ Pertimbangkan:
 2. Jika harga emas sudah tinggi dan inflasi rendah, bisa SELL_GOLD
 3. HOLD jika kondisi tidak jelas
 
-Hanya berikan JSON, tanpa markdown atau penjelasan lain.`,
-                },
-                {
-                    role: "user",
-                    content: "Berikan analisis dan rekomendasi trading saat ini.",
-                },
-            ],
-            temperature: 0.7,
-            max_tokens: 300,
-        });
+Hanya berikan JSON, tanpa markdown atau penjelasan lain.`;
 
-        const responseText = completion.choices[0]?.message?.content || "";
+        const result = await model.generateContent(prompt);
+        const responseText = result.response.text();
 
         // Parse JSON response
         let parsed;
@@ -210,7 +196,7 @@ Hanya berikan JSON, tanpa markdown atau penjelasan lain.`,
             expiresAt: Date.now() + 15 * 60 * 1000,
         };
     } catch (error) {
-        console.error("Groq API error:", error);
+        console.error("Gemini API error:", error);
 
         // Fallback signal
         return {

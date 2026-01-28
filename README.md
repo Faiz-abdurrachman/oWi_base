@@ -4,7 +4,7 @@
 
 [![Built on Base](https://img.shields.io/badge/Built%20on-Base-0052FF?style=flat-square)](https://base.org)
 [![Base Mini App](https://img.shields.io/badge/Base-Mini%20App-00D395?style=flat-square)](https://docs.base.org/mini-apps)
-[![Powered by AI](https://img.shields.io/badge/Powered%20by-AI-10B981?style=flat-square)](https://groq.com)
+[![Powered by AI](https://img.shields.io/badge/Powered%20by-Gemini-10B981?style=flat-square)](https://ai.google.dev)
 [![x402 Micropayments](https://img.shields.io/badge/x402-Micropayments-FFD700?style=flat-square)](https://x402.org)
 
 ## 📋 Tentang oWi AI
@@ -30,7 +30,7 @@ oWi AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini App**
 | Web3 | Wagmi 2.x, Viem 2.x, OnchainKit |
 | Mini App SDK | @farcaster/miniapp-sdk |
 | Backend | Hono.js, TypeScript |
-| AI | Groq (llama-3.3-70b-versatile) |
+| AI | Google Gemini Flash |
 | Oracle | Chainlink Price Feeds |
 
 ## 📁 Struktur Proyek
@@ -153,7 +153,7 @@ NEXT_PUBLIC_ONCHAINKIT_API_KEY=your_api_key
 NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_project_id
 
 # Backend
-GROQ_API_KEY=your_groq_api_key
+GEMINI_API_KEY=your_gemini_api_key
 JWT_SECRET=your_jwt_secret
 ```
 

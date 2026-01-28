@@ -10,7 +10,7 @@ const nonceStore = new Map<string, { nonce: string; expires: number }>();
 
 // JWT Secret (in production, use environment variable)
 const JWT_SECRET = new TextEncoder().encode(
-    process.env.JWT_SECRET || "goldguard-secret-key-change-in-production"
+    process.env.JWT_SECRET || "owi-secret-key-change-in-production"
 );
 
 /**
