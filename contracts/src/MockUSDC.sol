@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * @title MockUSDC
- * @author GoldGuard Team
+ * @author oWi Team
  * @notice Token ERC-20 mock untuk USDC yang digunakan untuk testing di testnet
  * @dev Token ini memiliki 6 decimals seperti USDC asli dan termasuk fungsi faucet untuk testing
  */

@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * @title MockGold
- * @author GoldGuard Team
+ * @author oWi Team
  * @notice Token ERC-20 mock untuk Gold (XAU) yang digunakan untuk testing di testnet
  * @dev Token ini memiliki 18 decimals dan termasuk fungsi faucet untuk testing
  */

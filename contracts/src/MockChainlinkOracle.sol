@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /**
  * @title MockChainlinkOracle
- * @author GoldGuard Team
+ * @author oWi Team
  * @notice Mock Chainlink price feed untuk testing
  * @dev Mengembalikan harga gold yang bisa diatur untuk testing
  */

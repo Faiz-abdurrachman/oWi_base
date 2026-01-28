@@ -50,6 +50,14 @@ owi/
 └── README.md
 ```
 
+## 📚 Documentation
+
+| File | Description |
+|------|-------------|
+| [setup.md](setup.md) | **Complete setup guide** - Start here for new computer setup |
+| [PROMPTS.md](PROMPTS.md) | Step-by-step development prompts (Foundry-based) |
+| [prd.md](prd.md) | Product Requirements Document |
+
 ## 🚀 Quick Start
 
 ### Prerequisites
