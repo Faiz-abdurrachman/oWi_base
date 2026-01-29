@@ -20,15 +20,21 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 // ============================================
-// Metadata
+// App Configuration
 // ============================================
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://owi.ai";
+const APP_NAME = "oWi AI";
+const APP_DESCRIPTION =
+    "Protect your wealth from inflation with AI-powered gold trading on Base.";
+
+// ============================================
+// Metadata for SEO & Mini Apps
+// ============================================
 
 export const metadata: Metadata = {
-    title: "oWi AI - Autonomous Gold Trading Bot",
-    description:
-        "Protect your wealth from inflation with AI-powered gold trading. Deposit USDC, get AI signals, and trade automatically on Base.",
+    title: `${APP_NAME} - Autonomous Gold Trading Bot`,
+    description: APP_DESCRIPTION,
     keywords: [
         "gold trading",
         "AI trading bot",
@@ -38,45 +44,44 @@ export const metadata: Metadata = {
         "crypto",
         "USDC",
         "tokenized gold",
+        "mini app",
     ],
     authors: [{ name: "oWi Team" }],
     creator: "oWi Team",
-    publisher: "oWi AI",
+    publisher: APP_NAME,
 
-    // Open Graph
+    // Open Graph for social sharing
     openGraph: {
         type: "website",
         locale: "en_US",
         url: APP_URL,
-        title: "oWi AI - Autonomous Gold Trading Bot",
-        description:
-            "Protect your wealth from inflation with AI-powered gold trading on Base.",
-        siteName: "oWi AI",
+        title: `${APP_NAME} - Autonomous Gold Trading Bot`,
+        description: APP_DESCRIPTION,
+        siteName: APP_NAME,
         images: [
             {
                 url: `${APP_URL}/og-image.png`,
                 width: 1200,
                 height: 630,
-                alt: "oWi AI - Autonomous Gold Trading",
+                alt: `${APP_NAME} - Autonomous Gold Trading`,
             },
         ],
     },
 
-    // Twitter
+    // Twitter Card
     twitter: {
         card: "summary_large_image",
-        title: "oWi AI - Autonomous Gold Trading Bot",
-        description:
-            "Protect your wealth from inflation with AI-powered gold trading on Base.",
+        title: `${APP_NAME} - Autonomous Gold Trading Bot`,
+        description: APP_DESCRIPTION,
         images: [`${APP_URL}/og-image.png`],
     },
 
-    // App
-    applicationName: "oWi AI",
+    // PWA Configuration
+    applicationName: APP_NAME,
     appleWebApp: {
         capable: true,
         statusBarStyle: "black-translucent",
-        title: "oWi AI",
+        title: APP_NAME,
     },
     formatDetection: {
         telephone: false,
@@ -91,12 +96,14 @@ export const metadata: Metadata = {
         apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
     },
 
-    // Manifest
+    // PWA Manifest
     manifest: "/manifest.json",
 
-    // Other
+    // ============================================
+    // Farcaster Frame Meta Tags (REQUIRED for Mini Apps)
+    // ============================================
     other: {
-        // Farcaster Mini App Meta Tag
+        // Frame embed configuration
         "fc:frame": JSON.stringify({
             version: "next",
             imageUrl: `${APP_URL}/embed.png`,
@@ -104,15 +111,24 @@ export const metadata: Metadata = {
                 title: "Open oWi AI",
                 action: {
                     type: "launch_frame",
-                    name: "oWi AI",
+                    name: APP_NAME,
                     url: APP_URL,
                     splashImageUrl: `${APP_URL}/splash.png`,
                     splashBackgroundColor: "#0F172A",
                 },
             },
         }),
+        // Additional frame metadata
+        "fc:frame:image": `${APP_URL}/embed.png`,
+        "fc:frame:button:1": "Open oWi AI",
+        "fc:frame:button:1:action": "link",
+        "fc:frame:button:1:target": APP_URL,
     },
 };
+
+// ============================================
+// Viewport Configuration
+// ============================================
 
 export const viewport: Viewport = {
     width: "device-width",
@@ -121,10 +137,12 @@ export const viewport: Viewport = {
     userScalable: false,
     themeColor: "#0F172A",
     colorScheme: "dark",
+    // Safe area insets for Mini Apps
+    viewportFit: "cover",
 };
 
 // ============================================
-// Root Layout
+// Root Layout Component
 // ============================================
 
 export default function RootLayout({
@@ -133,8 +151,27 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-            <body className="font-sans">
+        <html
+            lang="en"
+            className={`${inter.variable} ${jetbrainsMono.variable}`}
+            suppressHydrationWarning
+        >
+            <head>
+                {/* Safe Area CSS Variables for Mini Apps */}
+                <style
+                    dangerouslySetInnerHTML={{
+                        __html: `
+              :root {
+                --sat: env(safe-area-inset-top);
+                --sar: env(safe-area-inset-right);
+                --sab: env(safe-area-inset-bottom);
+                --sal: env(safe-area-inset-left);
+              }
+            `,
+                    }}
+                />
+            </head>
+            <body className="font-sans antialiased">
                 <Providers>{children}</Providers>
             </body>
         </html>
