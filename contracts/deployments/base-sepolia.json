@@ -1,0 +1,12 @@
+{
+    "network": "base-sepolia",
+    "chainId": 84532,
+    "contracts": {
+        "usdc": "",
+        "gold": "",
+        "oracle": "",
+        "vault": ""
+    },
+    "initialGoldPrice": "2150.50",
+    "deployedAt": ""
+}
