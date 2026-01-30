@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 1. [Phase 0: Environment Setup](#phase-0-environment-setup)
 2. [Phase 1: Smart Contracts (Foundry)](#phase-1-smart-contracts-foundry)
@@ -30,8 +30,9 @@ STRUCTURE:
 owi/
 ├── frontend/          # Next.js 14 Base Mini App
 ├── backend/           # Hono.js API server
-├── contracts/         # Foundry smart contracts
+├── contracts/         # Foundry smart contracts (NOT a pnpm workspace)
 ├── package.json       # Root workspace config
+├── pnpm-workspace.yaml # pnpm workspace definition
 ├── .env.example       # Environment template
 ├── .gitignore         # Git ignore
 └── README.md          # Documentation
@@ -39,22 +40,27 @@ owi/
 
 ROOT FILES:
 
-1. **package.json** - Workspace config:
-   - workspaces: ["frontend", "backend"]
-   - Scripts: dev, build, test
-   - Foundry commands: forge:build, forge:test
+1. **package.json** - pnpm workspace root:
+   - private: true
+   - Scripts: dev (runs frontend + backend via concurrently)
+   - Foundry commands: forge:build, forge:test, forge:deploy
 
-2. **.env.example** with:
+2. **pnpm-workspace.yaml**:
+   packages:
+     - "frontend"
+     - "backend"
+
+3. **.env.example** with:
    - PRIVATE_KEY, BASE_SEPOLIA_RPC_URL, BASESCAN_API_KEY
    - NEXT_PUBLIC_VAULT_ADDRESS, USDC_ADDRESS, GOLD_ADDRESS
    - NEXT_PUBLIC_ONCHAINKIT_API_KEY
    - GEMINI_API_KEY, JWT_SECRET
 
-3. **.gitignore** untuk Node.js + Foundry:
+4. **.gitignore** untuk Node.js + Foundry:
    - node_modules/, .env, .next/
    - contracts/out/, contracts/cache/, contracts/broadcast/
 
-4. **README.md** dengan badge Base Mini App dan Foundry
+5. **README.md** dengan badge Base Mini App dan Foundry
 ```
 
 ---
@@ -226,7 +232,7 @@ SETUP:
 - Create test users with ETH and tokens
 - Define local events untuk vm.expectEmit
 
-Run: forge test -vvv
+Run: pnpm forge:test
 Target: All tests pass
 ```
 
@@ -257,8 +263,8 @@ USAGE:
 # Local
 forge script script/Deploy.s.sol --fork-url $RPC_URL --broadcast
 
-# Base Sepolia dengan verification
-forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast --verify
+# Base Sepolia dengan verification (from root)
+pnpm forge:deploy
 ```
 
 ---
@@ -786,16 +792,13 @@ cp .env.example .env
 # Edit .env dengan PRIVATE_KEY
 
 # Build
-forge build
+pnpm forge:build
 
 # Test
-forge test -vvv
+pnpm forge:test
 
-# Deploy
-forge script script/Deploy.s.sol \
-  --rpc-url base_sepolia \
-  --broadcast \
-  --verify
+# Deploy (from root)
+pnpm forge:deploy
 
 # Export ABIs
 node export-abis.js
@@ -854,19 +857,23 @@ STEPS:
 
 ### Foundry Commands
 ```bash
-forge build              # Compile
-forge test -vvv          # Test dengan verbosity
-forge script Deploy.s.sol --broadcast  # Deploy
-forge verify-contract    # Verify on explorer
+pnpm forge:build          # Compile contracts
+pnpm forge:test           # Test dengan verbosity
+pnpm forge:deploy         # Deploy ke Base Sepolia
 ```
 
 ### Development
 ```bash
-# Frontend
-cd frontend && npm run dev
+# Run frontend + backend (from root)
+pnpm dev
 
-# Backend  
-cd backend && npm run dev
+# Run separately
+pnpm dev:frontend
+pnpm dev:backend
+
+# Using pnpm filter
+pnpm --filter owi-frontend dev
+pnpm --filter owi-backend dev
 
 # Contracts
 cd contracts && forge test
@@ -880,4 +887,4 @@ cd contracts && forge test
 
 ---
 
-**Built for Base Hackathon 2026** 🚀
+**Built for Base Hackathon 2026**

@@ -1,4 +1,4 @@
-# 🛡️ oWi AI
+# oWi AI
 
 > Bot Trading Otonom untuk Perlindungan Inflasi dengan AI di Base Blockchain
 
@@ -7,20 +7,20 @@
 [![Powered by AI](https://img.shields.io/badge/Powered%20by-Gemini-10B981?style=flat-square)](https://ai.google.dev)
 [![x402 Micropayments](https://img.shields.io/badge/x402-Micropayments-FFD700?style=flat-square)](https://x402.org)
 
-## 📋 Tentang oWi AI
+## Tentang oWi AI
 
 oWi AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini App** di dalam Coinbase Wallet dan Farcaster clients. Aplikasi ini menggunakan kecerdasan buatan untuk secara otomatis memperdagangkan antara **USDC** (stablecoin) dan **tokenized gold** (XAU) untuk melindungi daya beli pengguna dari inflasi.
 
-### ✨ Fitur Utama
+### Fitur Utama
 
-- 🤖 **Fully Autonomous** - AI membuat keputusan trading 24/7
-- 💰 **Perlindungan Inflasi** - Otomatis hedge terhadap devaluasi mata uang
-- 💎 **Accessible** - Mulai dengan hanya $10
-- ⚡ **Pay-Per-Use** - Hanya bayar untuk sinyal AI yang Anda gunakan (via x402)
-- 📱 **Base Mini App** - Berjalan native di Coinbase Wallet & Farcaster
-- 🔒 **Non-Custodial** - Anda selalu mengontrol dana Anda
+- **Fully Autonomous** - AI membuat keputusan trading 24/7
+- **Perlindungan Inflasi** - Otomatis hedge terhadap devaluasi mata uang
+- **Accessible** - Mulai dengan hanya $10
+- **Pay-Per-Use** - Hanya bayar untuk sinyal AI yang Anda gunakan (via x402)
+- **Base Mini App** - Berjalan native di Coinbase Wallet & Farcaster
+- **Non-Custodial** - Anda selalu mengontrol dana Anda
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 | Komponen | Teknologi |
 |----------|-----------|
@@ -33,24 +33,27 @@ oWi AI adalah aplikasi DeFi mobile-first yang berjalan sebagai **Base Mini App**
 | AI | Google Gemini Flash |
 | Oracle | Chainlink Price Feeds |
 
-## 📁 Struktur Proyek
+## Struktur Proyek
 
 ```
 owi/
-├── frontend/          # Next.js Base Mini App
-│   ├── app/           # App router pages
-│   ├── lib/           # Providers, hooks, contracts
-│   └── public/        # Static assets & manifest
-├── backend/           # Hono.js API server
-│   └── src/routes/    # API endpoints
-├── contracts/         # Foundry smart contracts
-│   ├── src/           # Contract source files
-│   ├── test/          # Foundry tests
-│   └── script/        # Deploy scripts
+├── package.json          # Root workspace (pnpm)
+├── pnpm-workspace.yaml   # pnpm workspace config
+├── pnpm-lock.yaml        # Lock file
+├── frontend/             # Next.js Base Mini App
+│   ├── app/              # App router pages
+│   ├── lib/              # Providers, hooks, contracts
+│   └── public/           # Static assets & manifest
+├── backend/              # Hono.js API server
+│   └── src/routes/       # API endpoints
+├── contracts/            # Foundry smart contracts (NOT a workspace)
+│   ├── src/              # Contract source files
+│   ├── test/             # Foundry tests
+│   └── script/           # Deploy scripts
 └── README.md
 ```
 
-## 📚 Documentation
+## Documentation
 
 | File | Description |
 |------|-------------|
@@ -58,11 +61,12 @@ owi/
 | [PROMPTS.md](PROMPTS.md) | Step-by-step development prompts (Foundry-based) |
 | [prd.md](prd.md) | Product Requirements Document |
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
 - Node.js v18+
+- pnpm (`npm install -g pnpm`)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation) (untuk contracts)
 - Git
 - Wallet dengan Base Sepolia ETH
@@ -77,8 +81,8 @@ cd owi
 ### 2. Install Dependencies
 
 ```bash
-# Install npm packages
-npm install
+# Install all workspace packages
+pnpm install
 
 # Install Foundry dependencies
 cd contracts && forge install && cd ..
@@ -94,25 +98,31 @@ cp .env.example .env
 ### 4. Jalankan Development Server
 
 ```bash
-# Terminal 1: Backend
-cd backend && npm run dev
+# Run frontend + backend simultaneously (from root)
+pnpm dev
+```
 
-# Terminal 2: Frontend
-cd frontend && npm run dev
+Atau run secara terpisah:
+
+```bash
+# Frontend only
+pnpm dev:frontend
+
+# Backend only
+pnpm dev:backend
 ```
 
 ### 5. Test Smart Contracts
 
 ```bash
-cd contracts
-forge test -vvv
+pnpm forge:test
 ```
 
 ### 6. Buka Aplikasi
 
 Buka [http://localhost:3000](http://localhost:3000) di browser.
 
-## 📜 Smart Contracts
+## Smart Contracts
 
 | Contract | Deskripsi |
 |----------|-----------|
@@ -124,16 +134,15 @@ Buka [http://localhost:3000](http://localhost:3000) di browser.
 ### Deploy ke Base Sepolia
 
 ```bash
-cd contracts
-
 # Create .env dengan PRIVATE_KEY
+cd contracts
 source .env
 
 # Deploy dengan Foundry
-forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast --verify
+pnpm forge:deploy
 ```
 
-## 📱 Base Mini App
+## Base Mini App
 
 Aplikasi ini dibangun sebagai **Base Mini App** yang dapat berjalan di:
 - Coinbase Wallet
@@ -141,12 +150,12 @@ Aplikasi ini dibangun sebagai **Base Mini App** yang dapat berjalan di:
 - Base App
 
 ### Mini App Features
-- ✅ `@farcaster/miniapp-sdk` integration
-- ✅ `fc:miniapp` embed metadata
-- ✅ `/.well-known/farcaster.json` manifest
-- ✅ Coinbase Smart Wallet connector
+- `@farcaster/miniapp-sdk` integration
+- `fc:miniapp` embed metadata
+- `/.well-known/farcaster.json` manifest
+- Coinbase Smart Wallet connector
 
-## 🔐 Environment Variables
+## Environment Variables
 
 ```env
 # Blockchain (Foundry)
@@ -165,7 +174,7 @@ GEMINI_API_KEY=your_gemini_api_key
 JWT_SECRET=your_jwt_secret
 ```
 
-## 📱 Cara Kerja
+## Cara Kerja
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -191,11 +200,11 @@ JWT_SECRET=your_jwt_secret
 └─────────────────────────────────────────────────────┘
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Kontribusi selalu diterima! Silakan buat issue atau pull request.
 
-## 📄 License
+## License
 
 MIT License - lihat [LICENSE](LICENSE) untuk detail.
 

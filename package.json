@@ -3,22 +3,21 @@
   "version": "1.0.0",
   "description": "Autonomous trading bot for inflation protection using USDC and tokenized gold",
   "private": true,
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
   "scripts": {
-    "dev": "npm run dev:frontend",
-    "dev:frontend": "npm run dev -w frontend",
-    "dev:backend": "npm run dev -w backend",
-    "build": "npm run build:frontend && npm run build:backend",
-    "build:frontend": "npm run build -w frontend",
-    "build:backend": "npm run build -w backend",
-    "lint": "npm run lint -w frontend && npm run lint -w backend",
+    "dev": "concurrently -n FRONTEND,BACKEND -c cyan,magenta \"pnpm --filter owi-frontend dev\" \"pnpm --filter owi-backend dev\"",
+    "dev:frontend": "pnpm --filter owi-frontend dev",
+    "dev:backend": "pnpm --filter owi-backend dev",
+    "build": "pnpm --filter owi-frontend build && pnpm --filter owi-backend build",
+    "build:frontend": "pnpm --filter owi-frontend build",
+    "build:backend": "pnpm --filter owi-backend build",
+    "lint": "pnpm --filter owi-frontend lint && pnpm --filter owi-backend lint",
     "test": "echo \"Run 'cd contracts && forge test' for smart contract tests\"",
     "forge:build": "cd contracts && forge build",
     "forge:test": "cd contracts && forge test -vvv",
     "forge:deploy": "cd contracts && forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast --verify"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   },
   "engines": {
     "node": ">=18.0.0"

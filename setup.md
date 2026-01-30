@@ -1,22 +1,23 @@
-# 🚀 oWi AI - Complete Setup Guide
+# oWi AI - Complete Setup Guide
 
 > Guide lengkap untuk setup project oWi dari awal hingga production.
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 Pastikan sudah terinstall:
 
 | Tool | Link |
 |------|------|
 | Node.js v18+ | [nodejs.org](https://nodejs.org) |
-| Foundry | `curl -L https://foundry.paradigm.xyz \| bash && foundryup` |
+| pnpm | `npm install -g pnpm` |
+| Foundry | `curl -L https://foundry.paradigm.xyz | bash && foundryup` |
 | Git | [git-scm.com](https://git-scm.com) |
 
 ---
 
-## 🔑 Human Touch Required: API Keys & Credentials
+## Human Touch Required: API Keys & Credentials
 
 ### 1. WalletConnect Project ID
 **Untuk:** Wallet connection di frontend
@@ -65,12 +66,13 @@ Pastikan sudah terinstall:
 
 ---
 
-## ⚙️ Step-by-Step Setup
+## Step-by-Step Setup
 
 ### Step 1: Clone & Navigate
 
 ```bash
-cd "d:\hackaton base\owi"
+git clone https://github.com/yourusername/owi.git
+cd owi
 ```
 
 ### Step 2: Create Environment Files
@@ -78,7 +80,7 @@ cd "d:\hackaton base\owi"
 **Root .env:**
 
 ```bash
-copy .env.example .env
+cp .env.example .env
 ```
 
 Edit `.env` dengan values Anda:
@@ -105,7 +107,7 @@ GEMINI_API_KEY=your_gemini_api_key
 
 ```bash
 cd contracts
-copy .env.example .env
+cp .env.example .env
 ```
 
 Edit `contracts/.env`:
@@ -119,28 +121,19 @@ BASESCAN_API_KEY=your_basescan_api_key
 ### Step 3: Install Dependencies
 
 ```bash
-# Root
-cd "d:\hackaton base\owi"
-npm install
+# Install all workspace packages (from root)
+pnpm install
 
-# Frontend
-cd frontend
-npm install
-
-# Backend
-cd ../backend
-npm install
-
-# Contracts (Foundry)
-cd ../contracts
+# Install Foundry dependencies
+cd contracts
 forge install
+cd ..
 ```
 
 ### Step 4: Run Tests
 
 ```bash
-cd contracts
-forge test -vvv
+pnpm forge:test
 ```
 
 > Semua 21 tests harus PASS ✅
@@ -148,8 +141,7 @@ forge test -vvv
 ### Step 5: Deploy Contracts ke Base Sepolia
 
 ```bash
-cd contracts
-forge script script/Deploy.s.sol --rpc-url base-sepolia --broadcast --verify
+pnpm forge:deploy
 ```
 
 Setelah deploy, copy contract addresses dan update `.env`:
@@ -176,27 +168,40 @@ export const CONTRACTS = {
 
 ---
 
-## 🎮 Run Locally
+## Run Locally
 
-**Terminal 1 - Backend:**
+**Single Command (Recommended):**
 
 ```bash
-cd backend
-npm run dev
+# From root - runs frontend + backend with labeled logs
+pnpm dev
 ```
 
-**Terminal 2 - Frontend:**
+**Run Separately:**
 
 ```bash
-cd frontend
-npm run dev
+# Frontend only
+pnpm dev:frontend
+
+# Backend only
+pnpm dev:backend
+```
+
+**Using pnpm filter:**
+
+```bash
+# Frontend
+pnpm --filter owi-frontend dev
+
+# Backend
+pnpm --filter owi-backend dev
 ```
 
 Buka [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🔐 Human Touch: Farcaster Account Association
+## Farcaster Account Association
 
 **Untuk:** Mendaftarkan Mini App di Farcaster
 
@@ -204,7 +209,7 @@ Buka [http://localhost:3000](http://localhost:3000)
 
 1. Install Farcaster CLI:
    ```bash
-   npm install -g @farcaster/auth-cli
+   pnpm add -g @farcaster/auth-cli
    ```
 
 2. Generate association:
@@ -223,7 +228,7 @@ Buka [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🚀 Deploy ke Production
+## Deploy ke Production
 
 ### Frontend → Vercel
 
@@ -242,7 +247,7 @@ Buka [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📝 Submit ke Mini App Registry
+## Submit ke Mini App Registry
 
 1. Buka [base.org/miniapps](https://base.org/miniapps)
 2. Klik **"Submit Mini App"**
@@ -255,14 +260,14 @@ Buka [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## ✅ Checklist Final
+## Checklist Final
 
 | Task | Status |
 |------|--------|
 | API Keys configured | ⬜ |
-| Dependencies installed | ⬜ |
-| Tests passing | ⬜ |
-| Contracts deployed | ⬜ |
+| Dependencies installed (`pnpm install`) | ⬜ |
+| Tests passing (`pnpm forge:test`) | ⬜ |
+| Contracts deployed (`pnpm forge:deploy`) | ⬜ |
 | Contract addresses updated | ⬜ |
 | Farcaster credentials generated | ⬜ |
 | Frontend deployed | ⬜ |
@@ -271,12 +276,12 @@ Buka [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🆘 Troubleshooting
+## Troubleshooting
 
 | Error | Solution |
 |-------|----------|
-| "Cannot find module" errors | Run `npm install` di folder yang error |
-| Forge test fails | Pastikan `forge install` sudah dijalankan |
+| "Cannot find module" errors | Run `pnpm install` di root |
+| Forge test fails | Pastikan `forge install` sudah dijalankan di `/contracts` |
 | Contract deployment fails | Cek saldo testnet ETH di wallet deployment |
 | WalletConnect tidak connect | Verifikasi `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` benar |
 
